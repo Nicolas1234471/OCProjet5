@@ -22,10 +22,9 @@ const arrowright = document.querySelector('.arrow_right')
 const bulletpoints = document.querySelector('.dots')
 const imagebanner = document.querySelector('.banner-img')
 const textbanner = document.querySelector('#banner p')
-const bulletpointslist = document.querySelectorAll('.dot')
 let indexslide = 0
 
-function initdot() {
+function initDot() {
 	slides.forEach((_, index) => {
 		const dot = document.createElement('div')
 		dot.classList.add('dot')
@@ -35,9 +34,10 @@ function initdot() {
 		bulletpoints.appendChild(dot)
 	});
 }
-initdot();
+initDot();
 
 function updateDot() {
+	const bulletpointslist = document.querySelectorAll('.dot')
 	bulletpointslist.forEach((dot, index) => {
 		if (index === indexslide) {
 			dot.classList.add('dot_selected')
@@ -49,14 +49,22 @@ function updateDot() {
 }
 
 arrowright.addEventListener("click", () => {
-	alert('Clic flèche de droite')
-	indexslide++
+	if (indexslide === slides.length-1) {
+		indexslide = 0
+	}
+	else {
+		indexslide++
+	}
 	updateBanner()
 })
 
 arrowleft.addEventListener("click", () => {
-	alert('Clic flèche de gauche')
-	indexslide--
+	if (indexslide === 0) {
+		indexslide = 3
+	}
+	else {
+		indexslide--
+	}
 	updateBanner()
 })
 
@@ -65,18 +73,3 @@ function updateBanner() {
 	textbanner.innerHTML = slides[indexslide].tagLine
 	updateDot()
 }
-
-
-/* function changebanner() {
-	slides.forEach((_, index) => {
-		if (index === 0) 
-			imagebanner.src = "./assets/images/slideshow/slide1.jpg"
-		else if (index === 1)
-			imagebanner.src = "./assets/images/slideshow/slide2.jpg"
-		else if (index === 2)
-			imagebanner.src = "./assets/images/slideshow/slide3.jpg"
-		else if (index === 3)
-			imagebanner.src = "./assets/images/slideshow/slide4.png"
-	} );
-}
-changebanner(); */
